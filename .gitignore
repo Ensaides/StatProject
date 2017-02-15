@@ -1,0 +1,9 @@
+*.opendb
+StatProject.VC.db
+*.tlog
+StatProject/obj/x64/Debug Module/StatProject.log
+*.log
+*.suo
+StatProject/config/config.ini.backup
+*.ini
+*.config

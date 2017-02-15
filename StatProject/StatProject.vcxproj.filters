@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{5e53bfa6-6de2-44e5-a9c8-62ba97c71c6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{6c66b39a-5b45-4d7a-9230-1a24832693c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="config">
+      <UniqueIdentifier>{f30cbdbe-048a-4bb5-b4cd-0eda02836566}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\sql">
+      <UniqueIdentifier>{fa8eca5a-b988-4306-bd39-208ecdd46972}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\StatProject">
+      <UniqueIdentifier>{7cba3bc0-1993-4ae1-97d7-509aa9d821b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\StatProject">
+      <UniqueIdentifier>{c7f674f6-9313-41a9-8a0a-59f80fb693ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Lua">
+      <UniqueIdentifier>{0468a8e4-b964-49a7-89a0-b3ba880740c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\Lua">
+      <UniqueIdentifier>{e4800e31-416d-48af-9e18-5d730f4efe56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\html">
+      <UniqueIdentifier>{81c441a3-7437-40e6-b5d0-7701431e99e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data">
+      <UniqueIdentifier>{023da255-22fc-442d-ad27-cdae7b02c5e6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Connection.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\HTMLParser.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\JSONParser.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Database.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Config.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IO.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\modulemain.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\StatProject.cpp">
+      <Filter>src\StatProject</Filter>
+    </ClCompile>
+    <ClCompile Include="src\StatProjectLua.cpp">
+      <Filter>src\StatProject</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Test.cpp">
+      <Filter>src\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TSVParser.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="makefile" />
+    <None Include="config\config.ini">
+      <Filter>config</Filter>
+    </None>
+    <None Include="src\sql\database.sql">
+      <Filter>src\sql</Filter>
+    </None>
+    <None Include="config\config.ini.backup">
+      <Filter>config</Filter>
+    </None>
+    <None Include="include\LuaHelpers.inl">
+      <Filter>include\Lua</Filter>
+    </None>
+    <None Include="src\html\index.html">
+      <Filter>src\html</Filter>
+    </None>
+    <None Include="src\html\data.tsv">
+      <Filter>src\html</Filter>
+    </None>
+    <None Include="data\Meeting(1) S2017-report.tsv">
+      <Filter>data</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\Connection.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\HTMLParser.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\JSONParser.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Database.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IO.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Config.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\StatProject.h">
+      <Filter>include\StatProject</Filter>
+    </ClInclude>
+    <ClInclude Include="include\StatProjectLua.h">
+      <Filter>include\StatProject</Filter>
+    </ClInclude>
+    <ClInclude Include="include\TSVParser.h">
+      <Filter>include</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "StatProject", "StatProject\StatProject.vcxproj", "{33E35B5A-613F-476C-A3F6-0C81506297EE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug Executable|x64 = Debug Executable|x64
+		Debug Module|x64 = Debug Module|x64
+		Release Executable|x64 = Release Executable|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{33E35B5A-613F-476C-A3F6-0C81506297EE}.Debug Executable|x64.ActiveCfg = Debug Executable|x64
+		{33E35B5A-613F-476C-A3F6-0C81506297EE}.Debug Executable|x64.Build.0 = Debug Executable|x64
+		{33E35B5A-613F-476C-A3F6-0C81506297EE}.Debug Module|x64.ActiveCfg = Debug Module|x64
+		{33E35B5A-613F-476C-A3F6-0C81506297EE}.Debug Module|x64.Build.0 = Debug Module|x64
+		{33E35B5A-613F-476C-A3F6-0C81506297EE}.Release Executable|x64.ActiveCfg = Release Executable|x64
+		{33E35B5A-613F-476C-A3F6-0C81506297EE}.Release Executable|x64.Build.0 = Release Executable|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,7 @@
+CREATE SCHEMA IF NOT EXISTS `pantherhackers` DEFAULT CHARACTER SET utf8;
+
+CREATE TABLE IF NOT EXISTS `pantherhackers`.`users` (
+	  `uid` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+	  `name` VARCHAR(128) NULL,
+	  PRIMARY KEY (`uid`),
+	  UNIQUE INDEX `idusers_UNIQUE` (`uid` ASC));

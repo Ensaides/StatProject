@@ -25,13 +25,40 @@ static void LoadMeeting1()
 {
 	// Load the tsv from meeting[1] into a string
 	std::string Meeting1(IO::ReadFile("data/Meeting(1) S2017-report.tsv"));
-	Json::Value Root = TSVParser::TSVToJson(Meeting1);
+	auto Meeting1Json = TSVParser::TSVToJson(Meeting1);
 
-	Meeting1 = "";
-	for (auto Elem : Root)
+	for (auto Record : Meeting1Json)
 	{
-		Meeting1 += Elem.toStyledString();
-		Meeting1 += '\n';
+		for (int i = 0; i < 7; i++)
+		{
+			try
+			{
+				switch (i) // 3-6
+				{
+				case 3:
+					printf("\t%s\n", Record.getMemberNames()[i].c_str());
+					break;
+				case 4:
+					printf("\t%s\n", Record.getMemberNames()[i].c_str());
+					break;
+				case 5:
+					printf("\t%s\n", Record.getMemberNames()[i].c_str());
+					break;
+				case 6:
+					printf("\t%s\n", Record.getMemberNames()[i].c_str());
+					break;
+
+				default:
+					break;
+				}
+			}
+			catch (std::exception& e)
+			{
+
+			}
+		}
+
+		printf("\n");
 	}
 }
 

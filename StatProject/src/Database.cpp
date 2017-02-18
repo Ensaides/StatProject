@@ -18,13 +18,10 @@ static otl_connect db;
 // Handy dandy lil function for printing errors
 static inline void PrintErrors(otl_exception& p)
 {
-	printf("OTL Error Code:\t\t %d\n", p.code);
-	printf("OTL Error Message:\t%s\n", p.msg);
+	IO::Printf("OTL Error Code:\t\t %d", p.code);
+	IO::Printf("OTL Error Message:\t%s", p.msg);
 }
 
-// Execute a query on the database object
-// If bCatchException = true, then the func will catch any OTL exceptions and print errors
-// If bCatchException = false, it will rethrow the exceptions
 void Database::Query(std::string Query, bool bCatchException = true)
 {
 	try
@@ -69,7 +66,7 @@ void Database::Connect()
 			+ Config::GetConfigValues()["ConnectorName"]
 		).c_str());
 
-		printf("Connected to database.\n");
+		IO::Printf("Connected to database '%s'.", Config::GetConfigValues()["ConnectorName"].c_str());
 	}
 	catch (otl_exception& p)
 	{

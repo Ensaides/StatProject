@@ -1,5 +1,13 @@
 #pragma once
 
+namespace StatProjectLua
+{
+	struct LuaFunctionDeclarer
+	{
+		LuaFunctionDeclarer(std::string Name, lua_CFunction Func);
+	};
+}
+
 #define DECLARE_LUA_FUNC(NAME, FUNC) \
 	static auto __LUAFUNC_##NAME = StatProjectLua::LuaFunctionDeclarer(std::string(#NAME), (lua_CFunction)FUNC);
 

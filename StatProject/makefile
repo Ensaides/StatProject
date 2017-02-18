@@ -1,9 +1,9 @@
 CC=g++
 CFLAGS=-std=c++14 
-INCUDES=-I./include -I/usr/include/libxml2 -I/usr/include/jsoncpp
-SRC=./src/StatProject.cpp ./src/Connection.cpp ./src/HTMLParser.cpp ./src/JSONParser.cpp ./src/Database.cpp ./src/Config.cpp ./src/IO.cpp ./src/TSVParser.cpp
+INCUDES=-I./include -I/usr/include/libxml2 -I/usr/include/jsoncpp -I/usr/include/libxl
+SRC=./src/StatProject.cpp ./src/Connection.cpp ./src/HTMLParser.cpp ./src/JSONParser.cpp ./src/Database.cpp ./src/Config.cpp ./src/IO.cpp ./src/TSVParser.cpp ./src/ExcelParser.cpp
 LUASRC=./src/StatProjectLua.cpp ./src/Test.cpp
-LIBS= -lcurl -lxml2 -ljsoncpp -x86_64-linux-gnu/libOpenCL.so.1 -lodbc -pthread
+LIBS= -lcurl -lxml2 -ljsoncpp -x86_64-linux-gnu/libOpenCL.so.1 -lxl -lodbc -pthread
 
 StatProjectExecutable: $(SRC) $(INCLUDES)
 	$(CC) $(CFLAGS) -DSTATPROJECT_EXECUTABLE $(INCUDES) -o./bin/debug/statproject $(SRC) ./src/main.cpp $(LIBS)

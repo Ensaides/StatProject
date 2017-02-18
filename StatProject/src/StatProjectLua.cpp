@@ -1,4 +1,5 @@
 #include "StatProjectLua.h"
+#include "IO.h"
 #include <vector>
 
 using namespace StatProjectLua;
@@ -20,7 +21,7 @@ LuaFunctionDeclarer::LuaFunctionDeclarer(std::string Name, lua_CFunction Func)
 
 void StatProjectLua::Initialize(lua_State* L)
 {
-	printf("Registering %zu functions...\n", GetLuaFuncs().size());
+	IO::Printf("Registering %zu functions...", GetLuaFuncs().size());
 
 	if (GetLuaFuncs().size())
 	{

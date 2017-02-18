@@ -101,7 +101,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Module|x64'">
     <RemoteBuildCommandLine>cd  $(RemoteRootDir)/$(ProjectName);make StatProjectModule</RemoteBuildCommandLine>
-    <NMakeIncludeSearchPath>$(ProjectDir)\include;\\10.0.0.138\include\libxml2;\\10.0.0.138\include\lua5.3;\\10.0.0.138\include;\\10.0.0.138\include\jsoncpp;$(NMakeIncludeSearchPath)</NMakeIncludeSearchPath>
+    <NMakeIncludeSearchPath>\\10.0.0.138\include\libxl;$(ProjectDir)\include;\\10.0.0.138\include\libxml2;\\10.0.0.138\include\lua5.3;\\10.0.0.138\include;\\10.0.0.138\include\jsoncpp;$(NMakeIncludeSearchPath)</NMakeIncludeSearchPath>
     <NMakePreprocessorDefinitions>STATPROECT_MODULE=1</NMakePreprocessorDefinitions>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Executable|x64'">
@@ -115,6 +115,7 @@
     <ClCompile Include="src\Config.cpp" />
     <ClCompile Include="src\Connection.cpp" />
     <ClCompile Include="src\Database.cpp" />
+    <ClCompile Include="src\ExcelParser.cpp" />
     <ClCompile Include="src\IO.cpp" />
     <ClCompile Include="src\HTMLParser.cpp" />
     <ClCompile Include="src\JSONParser.cpp" />
@@ -136,6 +137,10 @@
     <None Include="config\config.ini.backup" />
     <None Include="data\Meeting(1) S2017-report.tsv" />
     <None Include="include\LuaHelpers.inl" />
+    <None Include="lua\include\Utils.lua" />
+    <None Include="lua\include\StatProject.lua" />
+    <None Include="lua\lib\luvit-loader.lua" />
+    <None Include="lua\src\main.lua" />
     <None Include="makefile">
       <RemoteCopyFile Condition="'$(Configuration)|$(Platform)'=='Debug Executable|x64'">true</RemoteCopyFile>
       <RemoteCopyFile Condition="'$(Configuration)|$(Platform)'=='Debug Module|x64'">true</RemoteCopyFile>
@@ -146,11 +151,15 @@
       <RemoteCopyFile Condition="'$(Configuration)|$(Platform)'=='Debug Executable|x64'">true</RemoteCopyFile>
       <RemoteCopyFile Condition="'$(Configuration)|$(Platform)'=='Debug Module|x64'">true</RemoteCopyFile>
     </None>
+    <None Include="StartServer.sh" />
+    <None Include="www\index.html" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Config.h" />
     <ClInclude Include="include\Connection.h" />
     <ClInclude Include="include\Database.h" />
+    <ClInclude Include="include\Dataset.h" />
+    <ClInclude Include="include\ExcelParser.h" />
     <ClInclude Include="include\IO.h" />
     <ClInclude Include="include\HTMLParser.h" />
     <ClInclude Include="include\JSONParser.h" />

@@ -1,0 +1,89 @@
+dofile("../lib/luvit-loader.lua");
+
+local http			= require("http");
+local utils			= require("utils");
+local table			= require("table");
+local fs			= require("fs");
+
+-- Takes in an optional table of pairs, returns the global environment
+-- The first pair value is the name of the variable, the second pair value is the value
+GetEnvironment = function(...)
+	local env = _G;
+	env.require = require;
+	env.LuaServer = LuaServer;
+	env.utils = utils;
+	env.fs = fs;
+	env.Hooks = Hooks;
+	env.LoadScript = LoadScript;
+	env.Include = Include;
+	env.GetEnvironment = GetEnvironment;
+
+	for _,v in pairs({...}) do
+		env[v[1]] = v[2];
+	end
+
+	return env;
+end
+
+-- Load the includes
+LoadScript = function(filename)
+	local f, ferr = loadfile(filename);
+	if (f) then
+		setfenv(f, GetEnvironment());
+
+		local ok, res = xpcall(f, debug.traceback);
+		
+		if (ok) then
+			return res;
+		else
+			utils.print(utils.colorize("err", res));
+		end
+	else
+		utils.print(utils.colorize("err", ferr));
+	end
+end
+
+Include = function(filename)
+	return LoadScript("../include/" .. filename);
+end
+
+Include("Utils.lua");
+Include("StatProject.lua");
+
+-- Actually create the server!
+http.createServer(function (req, res)
+	-- Redirect the URL to the html folder
+	local filepath = "../../www" .. req.url;
+
+	-- Append 'index.html' to the end of a url
+	if utils.string.ends(filepath, '/') then
+		filepath = filepath .. "index.html";
+	end
+
+	-- Check if the file exists before we load it
+	local ok, err = fs.existsSync(filepath);
+	if (ok) then
+		-- Load the file and send it
+		if (utils.string.ends(filepath, ".html")) then
+			local body = fs.readFileSync(filepath);
+			res:setHeader("Content-Type", "text/html");
+			res:setHeader("Content-Length", #body);
+			res:write(body);
+			res:finish();
+			return;
+		end
+	end
+
+	if (err) then
+		utils.log(utils.colorize("err", err));
+	end
+
+	local body = "404 error";
+	res:writeHead(404, {["Content-Type"] = "text/plain"});
+	res:setHeader("Content-Length", #body);
+	res:write(body);
+	res:finish();
+
+end):listen(52, '10.0.0.138');
+
+utils.log("Server running at " .. utils.colorize("quotes", "http://" .. '10.0.0.138' .. ":" .. '52' .. "/"));

@@ -2,6 +2,8 @@
 #include <fstream>
 #include <sstream>
 #include <exception>
+#include <time.h>
+#include <cstdarg>
 
 static std::string Directory;
 static bool bSetDirectory = false;
@@ -49,4 +51,39 @@ std::string IO::ReadFile(std::string FilePath)
 	buffer << t.rdbuf();
 
 	return buffer.str();
+}
+
+void IO::Print(const std::string& Text, bool bPrintDate, bool bLogToFile)
+{
+	if (bPrintDate)
+	{
+		time_t rawtime;
+		struct tm* timeinfo;
+		char date[80];
+		char time[80];
+
+		::time(&rawtime);
+		timeinfo = localtime(&rawtime);
+		strftime(date, 80, "%x", timeinfo);
+		strftime(time, 80, "%X", timeinfo);
+
+		// These weird expressions colorize the output
+		printf("\033[38;5;253m%s\033[0m \033[38;5;247m%s\033[0m %s\n", date, time, Text.c_str());
+	}
+	else
+	{
+		printf("%s\n", Text.c_str());
+	}
+}
+
+void IO::Printf(const char* Format, ...)
+{
+	// Forward the args into snprintf
+	va_list args;
+	va_start(args, Format);
+	char buffer[1024];
+	vsnprintf(buffer, 1024, Format, args);
+	va_end(args);
+
+	Print(std::string(buffer));
 }

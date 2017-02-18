@@ -31,6 +31,21 @@
     <Filter Include="data">
       <UniqueIdentifier>{023da255-22fc-442d-ad27-cdae7b02c5e6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="www">
+      <UniqueIdentifier>{b1c692f1-cf6a-435a-a21d-951330056d4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lua">
+      <UniqueIdentifier>{a9d5e913-bf69-4b76-abc6-12003ac239e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lua\src">
+      <UniqueIdentifier>{341759eb-2a10-4ad1-a477-e69606174514}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lua\lib">
+      <UniqueIdentifier>{42254289-8f1a-4b01-aed2-680d6ba09dd7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lua\include">
+      <UniqueIdentifier>{7ab89fcc-1ca9-463e-b9a2-1c37a5d33b0d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -69,6 +84,9 @@
     <ClCompile Include="src\TSVParser.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\ExcelParser.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="makefile" />
@@ -92,6 +110,22 @@
     </None>
     <None Include="data\Meeting(1) S2017-report.tsv">
       <Filter>data</Filter>
+    </None>
+    <None Include="www\index.html">
+      <Filter>www</Filter>
+    </None>
+    <None Include="lua\src\main.lua">
+      <Filter>lua\src</Filter>
+    </None>
+    <None Include="lua\lib\luvit-loader.lua">
+      <Filter>lua\lib</Filter>
+    </None>
+    <None Include="StartServer.sh" />
+    <None Include="lua\include\StatProject.lua">
+      <Filter>lua\include</Filter>
+    </None>
+    <None Include="lua\include\Utils.lua">
+      <Filter>lua\include</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -120,6 +154,12 @@
       <Filter>include\StatProject</Filter>
     </ClInclude>
     <ClInclude Include="include\TSVParser.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Dataset.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ExcelParser.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>

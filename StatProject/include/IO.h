@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <vector>
 
 namespace IO
 {
@@ -16,4 +17,6 @@ namespace IO
 
 	// Print formatted. Unfortunately you can't decide if you want to print the date or log to file
 	void Printf(const char* Format, ...);
+
+	void GetFilesInDirectory(std::string dir, std::vector<std::string>& files);
 }

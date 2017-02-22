@@ -1,5 +1,5 @@
-CC=g++
-CFLAGS=-std=c++14 
+CC=g++-6
+CFLAGS=-std=c++17 
 INCUDES=-I./include -I/usr/include/libxml2 -I/usr/include/jsoncpp -I/usr/include/libxl
 SRC=./src/StatProject.cpp ./src/Connection.cpp ./src/HTMLParser.cpp ./src/JSONParser.cpp ./src/Database.cpp ./src/Config.cpp ./src/IO.cpp ./src/TSVParser.cpp ./src/ExcelParser.cpp
 LUASRC=./src/StatProjectLua.cpp ./src/Test.cpp

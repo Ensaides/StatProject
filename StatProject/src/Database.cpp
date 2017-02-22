@@ -10,7 +10,7 @@
 #define OTL_ODBC_SELECT_STM_EXECUTE_BEFORE_DESCRIBE
 #define OTL_UNICODE // Compile OTL with Unicode
 
-#define OTL_CPP_14_ON
+#define OTL_CPP_17_ON
 #include <otlv4.h>
 
 static otl_connect db;

@@ -4,34 +4,34 @@ void JSONParser::PrintJson(Json::Value& Value, uint16_t Level)
 {
 	using namespace Json;
 
-	for (int i = 0; i < Level; i++)
-		printf("\t");
-	printf("Value Type: %d\n", Value.type());
+	//for (int i = 0; i < Level; i++)
+	//	printf("\t");
+	//printf("Value Type: %d\n", Value.type());
 
 	switch (Value.type())
 	{
 	case ValueType::stringValue:
 		for (int i = 0; i < Level; i++)
 			printf("\t");
-		printf("%s\n", Value.asCString());
+		printf("String: %s\n", Value.asCString());
 		break;
 
 	case ValueType::intValue:
 		for (int i = 0; i < Level; i++)
 			printf("\t");
-		printf("%d\n", Value.asInt());
+		printf("Int: %d\n", Value.asInt());
 		break;
 
 	case ValueType::uintValue:
 		for (int i = 0; i < Level; i++)
 			printf("\t");
-		printf("%u\n", Value.asUInt());
+		printf("UInt: %u\n", Value.asUInt());
 		break;
 
 	case ValueType::realValue:
 		for (int i = 0; i < Level; i++)
 			printf("\t");
-		printf("%f\n", Value.asFloat());
+		printf("Float: %f\n", Value.asFloat());
 		break;
 
 	default:
@@ -52,7 +52,7 @@ void JSONParser::PrintJson(Json::Value& Value, uint16_t Level)
 			for (int i = 0; i < Level; i++)
 				printf("\t");
 
-			printf("%s\n", Name.c_str());
+			printf("Object: %s\n", Name.c_str());
 		}
 
 		for (auto Elem : Value)

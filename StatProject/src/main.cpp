@@ -21,6 +21,12 @@ int main(int argc, char **argv)
 		//JSONParser::PrintJson(Root, 0);
 	});
 
+	Connection::DownloadPageThreaded("https://api.typeform.com/v1/form/G1Zwk8?key=" + Config::GetConfigValues()["TypeformMacAPIKey"],
+		[](std::string Data) -> void
+	{
+
+	});
+
 	printf("Press any button to exit...\n");
 	getc(stdin);
 }

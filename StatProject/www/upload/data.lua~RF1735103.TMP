@@ -1,0 +1,61 @@
+querystring = querystring or require("querystring");
+
+local function stringstarts(String,Start)
+   return string.sub(String,1,string.len(Start))==Start;
+end
+
+local function split(str, delimiter)
+	local result = { }
+	local from  = 1
+	local delim_from, delim_to = string.find( str, delimiter, from  )
+	while delim_from do
+	table.insert( result, string.sub( str, from , delim_from-1 ) )
+	from  = delim_to + 1
+	delim_from, delim_to = string.find( str, delimiter, from  )
+	end
+	table.insert( result, string.sub( str, from  ) )
+	return result
+end
+
+--p("on_request", req)
+local chunks = {}
+local length = 0
+req:on('data', function (chunk, len)
+	length = length + 1
+	chunks[length] = chunk
+end)
+req:on('end', function ()
+	local body = table.concat(chunks, "")
+	body = "length = " .. tostring(#body) .. "\n"
+	res:writeHead(200, {
+		["Content-Type"] = "text/plain",
+		["Content-Length"] = #body
+	})
+	res:finish(body)
+
+	local filename = "";
+	if (req["headers"]["Content-Type"]) then
+		--local boundary = string.match(req["headers"]["Content-Type"], "..+=(..+)");
+		local boundary = string.match(req["headers"]["Content-Type"], "%sboundary=(..+)");
+
+		local splitchunks = split(table.concat(chunks, ""), boundary);
+		for k, v in pairs(splitchunks) do
+			local lines = split(v, "\r\n");
+			for index, line in pairs(lines) do
+				if (not (stringstarts(line, "Content-Type") or stringstarts(line, "Content-Disposition"))) then
+					p(line)
+				end
+			end
+		end
+
+		--filename = string.match(table.concat(chunks, ""), "filename=\"(..+)\"..+");
+		--p(table.concat(chunks, ""));
+	end
+
+	local file = fs.openSync("../../data/upload/" .. filename, "w");
+	if (file) then
+		fs.writeSync(file, 0, table.concat(chunks, ""));
+	else
+		
+	end
+end)

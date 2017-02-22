@@ -5,6 +5,12 @@
 #include <time.h>
 #include <cstdarg>
 
+#include <sys/types.h>
+#include <dirent.h>
+#include <errno.h>
+#include <iostream>
+#include <cstring>
+
 static std::string Directory;
 static bool bSetDirectory = false;
 
@@ -86,4 +92,25 @@ void IO::Printf(const char* Format, ...)
 	va_end(args);
 
 	Print(std::string(buffer));
+}
+
+void IO::GetFilesInDirectory(std::string dir, std::vector<std::string>& files)
+{
+	using namespace std;
+	DIR *dp;
+	struct dirent *dirp;
+	if ((dp = opendir(dir.c_str())) == NULL) 
+	{
+		IO::Printf("Error(%d) opening %s", errno, dir.c_str());
+		return;
+	}
+
+	while ((dirp = readdir(dp)) != NULL) 
+	{
+		if ((strcmp(dirp->d_name, ".") != 0) && (strcmp(dirp->d_name, "..") != 0))
+		{
+			files.push_back(string(dirp->d_name));
+		}
+	}
+	closedir(dp);
 }

@@ -2,5 +2,5 @@
 
 namespace ExcelParser
 {
-	int Test();
+	void Init();
 }

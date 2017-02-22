@@ -46,6 +46,9 @@
     <Filter Include="lua\include">
       <UniqueIdentifier>{7ab89fcc-1ca9-463e-b9a2-1c37a5d33b0d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="www\upload">
+      <UniqueIdentifier>{4735a8df-cf86-4e2a-b1af-83b557ac1b9d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -126,6 +129,12 @@
     </None>
     <None Include="lua\include\Utils.lua">
       <Filter>lua\include</Filter>
+    </None>
+    <None Include="www\upload\data.lua">
+      <Filter>www\upload</Filter>
+    </None>
+    <None Include="include\Dataset.inl">
+      <Filter>include</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

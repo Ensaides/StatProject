@@ -1,6 +1,7 @@
 #include "StatProject.h"
 #include "IO.h"
 #include "Config.h"
+#include "ExcelParser.h"
 #include "Database.h"
 
 void StatProject::Initialize(int argc, const char **argv)
@@ -13,4 +14,5 @@ void StatProject::Initialize(int argc, const char **argv)
 
 	Config::LoadConfig();
 	Database::Connect();
+	ExcelParser::Init();
 }

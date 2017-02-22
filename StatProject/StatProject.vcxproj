@@ -136,6 +136,7 @@
     </None>
     <None Include="config\config.ini.backup" />
     <None Include="data\Meeting(1) S2017-report.tsv" />
+    <None Include="include\Dataset.inl" />
     <None Include="include\LuaHelpers.inl" />
     <None Include="lua\include\Utils.lua" />
     <None Include="lua\include\StatProject.lua" />
@@ -153,6 +154,7 @@
     </None>
     <None Include="StartServer.sh" />
     <None Include="www\index.html" />
+    <None Include="www\upload\data.lua" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Config.h" />

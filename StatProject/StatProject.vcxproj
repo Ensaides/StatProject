@@ -115,6 +115,7 @@
     <ClCompile Include="src\Config.cpp" />
     <ClCompile Include="src\Connection.cpp" />
     <ClCompile Include="src\Database.cpp" />
+    <ClCompile Include="src\Dataset.cpp" />
     <ClCompile Include="src\ExcelParser.cpp" />
     <ClCompile Include="src\IO.cpp" />
     <ClCompile Include="src\HTMLParser.cpp" />

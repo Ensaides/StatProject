@@ -36,11 +36,9 @@ int __lua_main(lua_State* L)
 		JSONParser::PrintJson(Root, 0);
 	});
 
-	//auto TestPage = Connection::DownloadPage("https://api.typeform.com/v1/form/l29JZA?key=" + Config::GetConfigValues()["TypeformAPIKey"]);
-
-	//lua_pushlstring(L, TestPage.c_str(), TestPage.length());
-
-	auto NewField = Data::Field<int32_t>("New Field");
+	using namespace Data;
+	auto NewDataset = Dataset();
+	NewDataset.AddField(Field<uint32_t>("New Field"));
 
 	return 1;
 }

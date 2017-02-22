@@ -52,17 +52,12 @@ namespace Data
 		return FieldType::null;
 	};
 
-
-	// FieldBase members
-	const FieldTypeT FieldBase::GetType() const
+	template<>
+	FieldTypeT GetFieldTypeOverride<unsigned int>()
 	{
-		return Type;
-	}
+		return FieldType::null;
+	};
 
-	const std::string FieldBase::GetName() const
-	{
-		return Name;
-	}
 
 	// Field members
 	template<typename T>
@@ -101,38 +96,6 @@ namespace Data
 	T& Field<T>::operator[](int32_t Index)
 	{
 		return Data[Index];
-	}
-
-
-	// Dataset members
-	void Dataset::AddField(FieldBase NewField)
-	{
-		Fields.push_back(NewField);
-	}
-
-	FieldBase& Dataset::GetField(std::string Name)
-	{
-		for (auto& Field : Fields)
-		{
-			if (Field.GetName() == Name)
-			{
-				return Field;
-			}
-		}
-
-		throw std::runtime_error("Could not find field '" + Name + "' in dataset");
-	}
-
-	bool Dataset::FieldExists(std::string Name)
-	{
-		for (auto& Field : Fields)
-		{
-			if (Field.GetName() == Name)
-			{
-				return true;
-			}
-		}
-		return false;
 	}
 }
 

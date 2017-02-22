@@ -90,6 +90,9 @@
     <ClCompile Include="src\ExcelParser.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\Dataset.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="makefile" />

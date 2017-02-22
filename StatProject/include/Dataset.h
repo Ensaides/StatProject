@@ -10,11 +10,11 @@ namespace Data
 
 	// This will determine FieldType from a given type T
 	template<typename T>
-	FieldTypeT GetFieldType();
+	static FieldTypeT GetFieldType();
 
 	// Override this with template specialization to define custom types.
 	template<typename T>
-	FieldTypeT GetFieldTypeOverride();
+	static FieldTypeT GetFieldTypeOverride();
 
 	// Interface class for fields.
 	class FieldBase
@@ -32,7 +32,7 @@ namespace Data
 
 	// Field class. Holds the name of the field, the type of the data, and a vector of type T
 	template <typename T>
-	class Field : FieldBase
+	class Field : public FieldBase
 	{
 	protected:
 		// The raw data

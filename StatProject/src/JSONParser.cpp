@@ -1,4 +1,5 @@
 #include "JSONParser.h"
+#include "Dataset.h"
 
 void JSONParser::PrintJson(Json::Value& Value, uint16_t Level)
 {
@@ -52,7 +53,7 @@ void JSONParser::PrintJson(Json::Value& Value, uint16_t Level)
 			for (int i = 0; i < Level; i++)
 				printf("\t");
 
-			printf("Object: %s\n", Name.c_str());
+			printf("Member: %s\n", Name.c_str());
 		}
 
 		for (auto Elem : Value)
@@ -60,4 +61,10 @@ void JSONParser::PrintJson(Json::Value& Value, uint16_t Level)
 			PrintJson(Elem, Level + 1);
 		}
 	}
+}
+
+void JSONParser::GetDatasetFromTypeform(Json::Value& Value, Data::Dataset& Out)
+{
+	using namespace Data;
+	Out = Dataset();
 }

@@ -3,7 +3,7 @@
 #include <iostream>
 #include <thread>
 #include <vector>
-#include <curl/curl.h>
+#include <cURLpp.hpp>
 
 static size_t writer(char* data, size_t size, size_t nmemb, std::string* writerData);
 static std::vector<std::thread> DownloadThreads;

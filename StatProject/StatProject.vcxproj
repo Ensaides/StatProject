@@ -101,7 +101,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Module|x64'">
     <RemoteBuildCommandLine>cd  $(RemoteRootDir)/$(ProjectName);make StatProjectModule</RemoteBuildCommandLine>
-    <NMakeIncludeSearchPath>\\10.0.0.138\include\libxl;$(ProjectDir)\include;\\10.0.0.138\include\libxml2;\\10.0.0.138\include\lua5.3;\\10.0.0.138\include;\\10.0.0.138\include\jsoncpp;$(NMakeIncludeSearchPath)</NMakeIncludeSearchPath>
+    <NMakeIncludeSearchPath>$(ProjectDir)\include;\\10.0.0.138\include\libxml2;\\10.0.0.138\include\lua5.3;\\10.0.0.138\include;\\10.0.0.138\include\jsoncpp;\\10.0.0.138\include\libxl;\\10.0.0.138\include\curlpp;$(NMakeIncludeSearchPath)</NMakeIncludeSearchPath>
     <NMakePreprocessorDefinitions>STATPROECT_MODULE=1</NMakePreprocessorDefinitions>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Executable|x64'">

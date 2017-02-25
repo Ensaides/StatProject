@@ -1,7 +1,7 @@
 #include "StatProjectLua.h"
 #include "TSVParser.h"
 #include "IO.h"
-#include "Database.h"
+//#include "Database.h"
 #include <sstream>
 
 lua_function(TestFunction)

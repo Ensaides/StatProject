@@ -13,52 +13,6 @@ namespace std
 
 namespace Data
 {
-	template<typename T>
-	FieldTypeT GetFieldType()
-	{
-		using namespace std;
-
-		// Field type user override
-		if (GetFieldTypeOverride<T>() != FieldType::null)
-			return GetFieldTypeOverride<T>();
-
-		if (is_same<T, ChoiceT>::value)
-		{
-			return FieldType::Choice;
-		}
-		else if (is_same<T, ExclusiveChoiceT>::value)
-		{
-			return FieldType::ExclusiveChoice;
-		}
-		else if (is_specialization_of<std::basic_string, T>::value)
-		{
-			return FieldType::String;
-		}
-		else if (is_integral<T>::value)
-		{
-			return FieldType::Integral;
-		}
-		else if (is_floating_point<T>::value)
-		{
-			return FieldType::Decimal;
-		}
-
-		return FieldType::null;
-	};
-
-	template<>
-	FieldTypeT GetFieldTypeOverride<void>()
-	{
-		return FieldType::null;
-	};
-
-	template<>
-	FieldTypeT GetFieldTypeOverride<unsigned int>()
-	{
-		return FieldType::null;
-	};
-
-
 	// Field members
 	template<typename T>
 	Field<T>::Field(std::string inName)
@@ -75,15 +29,9 @@ namespace Data
 	}
 
 	template<typename T>
-	Field<T>::Field(std::string inName, std::vector<T>&& inData) : Field<T>::Field(inName)
+	Field<T>::Field(std::string inName, int64_t inID) : Field<T>::Field(inName)
 	{
-		Data = std::move(inData);
-	}
-
-	template<typename T>
-	Field<T>::Field(std::string inName, std::vector<T>&& inData, FieldTypeT inType) : Field<T>::Field(inName, inData)
-	{
-		Type = inType;
+		ID = inID;
 	}
 
 	template<typename T>
@@ -96,6 +44,14 @@ namespace Data
 	T& Field<T>::operator[](int32_t Index)
 	{
 		return Data[Index];
+	}
+
+	// Dataset members
+	template<typename T>
+	void Dataset::AddField(T NewField)
+	{
+		static_assert(std::is_specialization_of<Field, T>::value, "NewField must be of type field!");
+		Fields.push_back(new T(NewField));
 	}
 }
 
@@ -115,6 +71,8 @@ namespace Data
 		{																											\
 			typedef TYPE Value;																						\
 		};																											\
+																													\
+		using NAME##T = TYPE;																						\
 																													\
 		template<>																									\
 		FieldTypeT GetFieldTypeOverride<TYPE>()																		\

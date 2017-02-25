@@ -10,8 +10,8 @@ namespace Data
 
 namespace JSONParser
 {
-	void PrintJson(Json::Value& Value, uint16_t Level);
+	void PrintJson(const Json::Value& Value, uint16_t Level);
 
-	void GetDatasetFromTypeform(Json::Value& Value, Data::Dataset& Out);
+	void GetDatasetFromTypeform(const Json::Value& Value, Data::Dataset& Out);
 }
 

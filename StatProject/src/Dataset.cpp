@@ -1,4 +1,5 @@
 #include "Dataset.h"
+#include <iostream>
 
 namespace Data
 {
@@ -13,20 +14,77 @@ namespace Data
 		return Name;
 	}
 
-
-	// Dataset members
-	void Dataset::AddField(FieldBase NewField)
+	void FieldBase::SetName(std::string inName)
 	{
-		Fields.push_back(NewField);
+		Name = inName;
 	}
 
+	const int64_t FieldBase::GetID() const
+	{
+		return ID;
+	}
+
+	void FieldBase::SetID(int64_t inID)
+	{
+		ID = inID;
+	}
+
+	void FieldBase::Print()
+	{
+		using namespace std;
+		cout << "Field name: " << GetName() << endl;
+
+		switch (GetType())
+		{
+
+		case FieldType::String:
+		{
+			auto Field = Cast<StringT>(*this);
+			if (Field)
+			{
+				for (auto Data : *Field)
+				{
+					cout << "\t";
+					for (wchar_t Char : Data)
+					{
+						wcout << Char;
+					}
+					cout << endl;
+				}
+				cout << endl << endl;
+			}
+		}
+		break;
+
+		case FieldType::Integral:
+		{
+			auto Field = Cast<IntegralT>(*this);
+
+			if (Field)
+			{
+				for (auto Data : *Field)
+				{
+					cout << "\t" << Data << endl;
+				}
+				cout << endl << endl;
+			}
+		}
+		break;
+
+		default:
+			break;
+		}
+	}
+
+
+	// Dataset members
 	FieldBase& Dataset::GetField(std::string Name)
 	{
 		for (auto& Field : Fields)
 		{
-			if (Field.GetName() == Name)
+			if (Field->GetName() == Name)
 			{
-				return Field;
+				return *Field;
 			}
 		}
 
@@ -37,11 +95,31 @@ namespace Data
 	{
 		for (auto& Field : Fields)
 		{
-			if (Field.GetName() == Name)
+			if (Field->GetName() == Name)
 			{
 				return true;
 			}
 		}
 		return false;
+	}
+
+	bool Dataset::FieldExists(int64_t Index)
+	{
+		for (auto& Field : Fields)
+		{
+			if (Field->GetID() == Index)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+	Dataset::~Dataset()
+	{
+		for (auto& Field : Fields)
+		{
+			delete Field;
+		}
 	}
 }

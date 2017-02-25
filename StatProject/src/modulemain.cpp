@@ -33,7 +33,9 @@ int __lua_main(lua_State* L)
 
 		NewReader.parse(Data, Root);
 
-		JSONParser::PrintJson(Root, 0);
+		Data::Dataset NewDataset;
+
+		JSONParser::GetDatasetFromTypeform(Root, NewDataset);
 	});
 
 	using namespace Data;

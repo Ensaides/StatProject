@@ -2,7 +2,6 @@
 #include <memory>
 #include <type_traits>
 #include <vector>
-#include <string>
 
 namespace Data
 {
@@ -14,7 +13,10 @@ namespace Data
 
 	// Override this with template specialization to define custom types.
 	template<typename T>
-	static FieldTypeT GetFieldTypeOverride();
+	static FieldTypeT GetFieldTypeOverride()
+	{
+		return 0;
+	};
 
 	// Interface class for fields.
 	class FieldBase
@@ -24,10 +26,19 @@ namespace Data
 		std::string Name;
 		// The Type member is included for downcasting. 
 		FieldTypeT Type;
+		// Used for Typeform Fields
+		int64_t ID;
 
 	public:
 		const FieldTypeT GetType() const;
+
 		const std::string GetName() const;
+		void SetName(std::string inName);
+
+		const int64_t GetID() const;
+		void SetID(int64_t inID);
+
+		void Print();
 	};
 
 	// Field class. Holds the name of the field, the type of the data, and a vector of type T
@@ -46,11 +57,7 @@ namespace Data
 		// In case the user wants to set a custom type
 		Field(std::string inName, FieldTypeT inType);
 
-		// In case the user wants to put in data in the constructor
-		Field(std::string inName, std::vector<T>&& inData);
-
-		// In case the user wants to put in data in the constructor and use a custom type
-		Field(std::string inName, std::vector<T>&& inData, FieldTypeT inType);
+		Field(std::string inName, int64_t inID);
 
 	public:
 		std::vector<T>& GetData();
@@ -67,6 +74,11 @@ namespace Data
 		{
 			return Data.end();
 		}
+
+		void operator<<(const T& Rhs)
+		{
+			Data.push_back(Rhs);
+		}
 	};
 
 
@@ -74,22 +86,37 @@ namespace Data
 	class Dataset
 	{
 	private:
-		std::vector<FieldBase> Fields;
+		std::vector<FieldBase*> Fields;
 
 	public:
 		// Push back a NewField on to Fields
-		void AddField(FieldBase NewField);
+		template<class T>
+		void AddField(T NewField);
 
 		// Get a Field by Name. It will throw an exception if it can't find the Field
 		FieldBase& GetField(std::string Name);
 
 		// Check if a Field exists. Will return true if it does exist, false otherwise
 		bool FieldExists(std::string Name);
+		bool FieldExists(int64_t Index);
 
 		// Operators and helpers
 		FieldBase& operator[](std::string Name)
 		{
 			return GetField(Name);
+		}
+
+		FieldBase& operator[](int64_t Index)
+		{
+			for (auto& Field : Fields)
+			{
+				if (Field->GetID() == Index)
+				{
+					return *Field;
+				}
+			}
+
+			throw std::runtime_error("Could not find field number '" + std::to_string(Index) + "' in dataset");
 		}
 
 		auto begin()
@@ -101,84 +128,43 @@ namespace Data
 		{
 			return Fields.end();
 		}
+
+		~Dataset();
 	};
 }
 
 namespace Data
 {
-	// Built in FieldType types
-	namespace FieldType
-	{
-		static const uint8_t null = 0;
-		static const uint8_t Integral = 1;
-		static const uint8_t Decimal = 2;
-		static const uint8_t String = 3;
-		static const uint8_t Choice = 4;
-		static const uint8_t ExclusiveChoice = 5;
-		static const uint8_t CustomTypeBeginning = 16;
-	};
-
-	typedef int64_t			IntegralT;
-	typedef double			DecimalT;
-	typedef std::wstring	StringT;
-
-	typedef uint32_t		ChoiceT;
-	typedef uint64_t		ExclusiveChoiceT;
-
-
 	// Use this struct to get the type from an enum
 	template<uint8_t n>
 	struct FieldTypeFromInt;
 
-	// null = 0
-	template<>
-	struct FieldTypeFromInt<0>
+	template<typename T>
+	FieldTypeT GetFieldType()
 	{
-		typedef void Value;
+		using namespace std;
+
+		// Field type user override
+		if (GetFieldTypeOverride<T>())
+			return GetFieldTypeOverride<T>();
+
+		return 0;
 	};
 
-	// Integral = 1
-	template<>
-	struct FieldTypeFromInt<1>
+	template<typename T>
+	static inline Field<T>* Cast(FieldBase& Base)
 	{
-		typedef IntegralT Value;
-	};
-
-	// Decimal = 2
-	template<>
-	struct FieldTypeFromInt<2>
-	{
-		typedef DecimalT Value;
-	};
-
-	// String = 3
-	template<>
-	struct FieldTypeFromInt<3>
-	{
-		typedef StringT Value;
-	};
-
-	// Choice = 4
-	template<>
-	struct FieldTypeFromInt<4>
-	{
-		typedef ChoiceT Value;
-	};
-
-	// ExclusiveChoice = 5
-	template<>
-	struct FieldTypeFromInt<5>
-	{
-		typedef ExclusiveChoiceT Value;
-	};
-
-	// CustomTypeBeginning = 16
-	template<>
-	struct FieldTypeFromInt<16>
-	{
-		typedef void Value;
-	};
+		return GetFieldType<T>() == Base.GetType() ? (Field<T>*) &Base : nullptr;
+	}
 }
 
 // Most of the implementations are in this .inl file
 #include "Dataset.inl"
+
+// Built in types
+DECLARE_FIELD_TYPE(void,			0,	 null)
+DECLARE_FIELD_TYPE(int64_t,			1,	 Integral)
+DECLARE_FIELD_TYPE(double,			2,	 Decimal)
+DECLARE_FIELD_TYPE(std::u16string,	3,	 String)
+DECLARE_FIELD_TYPE(uint32_t,		4,	 Choice)
+DECLARE_FIELD_TYPE(uint64_t,		5,	 ExclusiveChoice)

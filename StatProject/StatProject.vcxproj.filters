@@ -174,5 +174,8 @@
     <ClInclude Include="include\ExcelParser.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\StringHelpers.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

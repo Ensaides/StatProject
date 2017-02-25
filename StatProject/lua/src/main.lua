@@ -1,8 +1,10 @@
 dofile("../lib/luvit-loader.lua");
 
 local http			= require("http");
+local https			= require("https");
 local utils			= require("utils");
 local table			= require("table");
+local pathJoin		= require("luvi").path.join
 local fs			= require("fs");
 
 -- Takes in an optional table of pairs, returns the global environment
@@ -51,7 +53,8 @@ Include("Utils.lua");
 Include("StatProject.lua");
 
 -- Actually create the server!
-http.createServer(function (req, res)
+--http.createServer(
+local function onRequest(req, res)
 	-- Redirect the URL to the html folder
 	local filepath = "../../www" .. req.url;
 
@@ -103,6 +106,15 @@ http.createServer(function (req, res)
 	res:write(body);
 	res:finish();
 
-end):listen(52, '10.0.0.138');
+end
+--):listen(52, '10.0.0.138');
+
+http.createServer(onRequest):listen(52)
+--[[
+https.createServer({
+  key = fs.readFileSync(pathJoin(module.dir, "key.pem")),
+  cert = fs.readFileSync(pathJoin(module.dir, "cert.pem")),
+}, onRequest):listen(48)
+]]
 
 utils.log("Server running at " .. utils.colorize("quotes", "http://" .. '10.0.0.138' .. ":" .. '52' .. "/"));

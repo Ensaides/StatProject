@@ -168,6 +168,7 @@
     <ClInclude Include="include\JSONParser.h" />
     <ClInclude Include="include\StatProject.h" />
     <ClInclude Include="include\StatProjectLua.h" />
+    <ClInclude Include="include\StringHelpers.h" />
     <ClInclude Include="include\TSVParser.h" />
   </ItemGroup>
   <ItemDefinitionGroup />

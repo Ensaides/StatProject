@@ -23,6 +23,7 @@ std::string Connection::DownloadPage(const std::string URL)
 		curl_easy_setopt(curl, CURLOPT_URL, URL.c_str());
 		curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, writer);
 		curl_easy_setopt(curl, CURLOPT_WRITEDATA, &OutBuffer);
+		//curl_easy_setopt(curl, CURLOPT_ENCODING, "UTF-8");
 		res = curl_easy_perform(curl);
 		curl_easy_cleanup(curl);
 	}

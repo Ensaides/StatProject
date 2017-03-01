@@ -33,6 +33,8 @@ namespace Data
 	{
 		using namespace std;
 		cout << "Field name: " << GetName() << endl;
+		cout << "Field type: " << (int)GetType() << endl;
+		cout << "Field ID: " << (int)GetID() << endl;
 
 		switch (GetType())
 		{
@@ -113,13 +115,5 @@ namespace Data
 			}
 		}
 		return false;
-	}
-
-	Dataset::~Dataset()
-	{
-		for (auto& Field : Fields)
-		{
-			delete Field;
-		}
 	}
 }

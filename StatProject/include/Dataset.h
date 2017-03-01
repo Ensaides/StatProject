@@ -39,6 +39,8 @@ namespace Data
 		void SetID(int64_t inID);
 
 		void Print();
+
+		virtual FieldBase* Clone() { return new FieldBase(*this); };
 	};
 
 	// Field class. Holds the name of the field, the type of the data, and a vector of type T
@@ -51,6 +53,8 @@ namespace Data
 		std::vector<T> Data;
 
 	public:
+		Field(const Field<T>& Other);
+
 		// The default constructor. This will use GetFieldType<T>() to figure out what the Type should be
 		Field(std::string inName);
 
@@ -79,6 +83,11 @@ namespace Data
 		{
 			Data.push_back(Rhs);
 		}
+
+		virtual FieldBase* Clone() override
+		{
+			return new Field<T>(*this);
+		}
 	};
 
 
@@ -86,7 +95,7 @@ namespace Data
 	class Dataset
 	{
 	private:
-		std::vector<FieldBase*> Fields;
+		std::vector<std::shared_ptr<FieldBase>> Fields;
 
 	public:
 		// Push back a NewField on to Fields
@@ -119,17 +128,15 @@ namespace Data
 			throw std::runtime_error("Could not find field number '" + std::to_string(Index) + "' in dataset");
 		}
 
-		auto begin()
+		std::vector<std::shared_ptr<FieldBase>>::iterator begin()
 		{
 			return Fields.begin();
 		}
 
-		auto end()
+		std::vector<std::shared_ptr<FieldBase>>::iterator end()
 		{
 			return Fields.end();
 		}
-
-		~Dataset();
 	};
 }
 
@@ -155,6 +162,18 @@ namespace Data
 	static inline Field<T>* Cast(FieldBase& Base)
 	{
 		return GetFieldType<T>() == Base.GetType() ? (Field<T>*) &Base : nullptr;
+	}
+
+	template<typename T>
+	static inline Field<T>* Cast(FieldBase* Base)
+	{
+		return GetFieldType<T>() == Base->GetType() ? (Field<T>*) Base : nullptr;
+	}
+
+	template<typename T>
+	static inline Field<T>* Cast(std::shared_ptr<FieldBase> Base)
+	{
+		return GetFieldType<T>() == Base->GetType() ? (Field<T>*) Base.get() : nullptr;
 	}
 }
 

@@ -1,0 +1,7 @@
+BODY
+{
+    @font-face {
+        font-family: 'Fira Code'; /*a name to be used later*/
+        src: url('https://github.com/tonsky/FiraCode/blob/master/distr/ttf/FiraCode-Regular.ttf?raw=true'); /*URL to font*/
+    }
+}

@@ -139,6 +139,9 @@
     <None Include="include\Dataset.inl">
       <Filter>include</Filter>
     </None>
+    <None Include="www\main.css">
+      <Filter>www</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Connection.h">

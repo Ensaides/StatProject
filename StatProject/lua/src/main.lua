@@ -93,6 +93,13 @@ local function onRequest(req, res)
 			res:write(body);
 			res:finish();
 			return;
+		elseif(utils.string.ends(filepath, ".css")) then
+			local body = fs.readFileSync(filepath);
+			res:setHeader("Content-Type", "text/css");
+			res:setHeader("Content-Length", #body);
+			res:write(body);
+			res:finish();
+			return;
 		end
 	end
 
@@ -117,4 +124,4 @@ https.createServer({
 }, onRequest):listen(48)
 ]]
 
-utils.log("Server running at " .. utils.colorize("quotes", "http://" .. '10.0.0.138' .. ":" .. '52' .. "/"));
+utils.log("Server running at " .. utils.colorize("quotes", "http://" .. '127.0.0.1' .. ":" .. '52' .. "/"));

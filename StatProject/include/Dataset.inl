@@ -14,6 +14,16 @@ namespace std
 namespace Data
 {
 	// Field members
+
+	template<typename T>
+	Field<T>::Field(const Field<T>& Other)
+	{
+		Name = Other.Name;
+		Data = Other.Data;
+		Type = Other.Type;
+		ID = Other.ID;
+	}
+
 	template<typename T>
 	Field<T>::Field(std::string inName)
 	{
@@ -51,7 +61,7 @@ namespace Data
 	void Dataset::AddField(T NewField)
 	{
 		static_assert(std::is_specialization_of<Field, T>::value, "NewField must be of type field!");
-		Fields.push_back(new T(NewField));
+		Fields.push_back(std::make_shared<T>(NewField));
 	}
 }
 

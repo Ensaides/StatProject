@@ -155,6 +155,7 @@
     </None>
     <None Include="StartServer.sh" />
     <None Include="www\index.html" />
+    <None Include="www\main.css" />
     <None Include="www\upload\data.lua" />
   </ItemGroup>
   <ItemGroup>

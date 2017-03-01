@@ -69,11 +69,6 @@ void JSONParser::GetDatasetFromTypeform(const Json::Value& Value, Data::Dataset&
 
 	GetQuestions(Value, Out);
 	GetResponses(Value, Out);
-
-	for (auto Field : Out)
-	{
-		Field->Print();
-	}
 }
 
 void GetQuestions(const Json::Value& Value, Data::Dataset& Out)
@@ -101,7 +96,7 @@ void GetQuestions(const Json::Value& Value, Data::Dataset& Out)
 
 					if (SplitID.size())
 					{
-						if (SplitID[0] == "list" || SplitID[0] == "textfield")
+						if (SplitID[0] == "list" || SplitID[0] == "textfield" || SplitID[0] == "textarea")
 						{
 							Out.AddField(Field<StringT>("New Field", Index));
 						}

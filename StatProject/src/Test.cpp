@@ -3,11 +3,11 @@
 #include "IO.h"
 //#include "Database.h"
 #include <sstream>
-
+/*
 lua_function(TestFunction)
 {
 	std::string TestString(IO::ReadFile("data/Meeting(1) S2017-report.tsv"));
-	Json::Value Root = TSVParser::TSVToJson(TestString);
+	Json::Value Root = Parsers::TSV::TSVToJson(TestString);
 
 	TestString = "";
 	for (auto Elem : Root)
@@ -25,7 +25,7 @@ static void LoadMeeting1()
 {
 	// Load the tsv from meeting[1] into a string
 	std::string Meeting1(IO::ReadFile("data/Meeting(1) S2017-report.tsv"));
-	auto Meeting1Json = TSVParser::TSVToJson(Meeting1);
+	auto Meeting1Json = Parsers::TSV::TSVToJson(Meeting1);
 
 	for (auto Record : Meeting1Json)
 	{
@@ -62,6 +62,7 @@ static void LoadMeeting1()
 	}
 }
 
+
 lua_function(LoadData)
 {
 	LoadMeeting1();
@@ -76,3 +77,4 @@ lua_function(LoadData)
 
 	return 1;
 }
+*/

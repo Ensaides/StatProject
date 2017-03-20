@@ -1,6 +1,7 @@
 #pragma once
 #include "Dataset.h"
 #include <string>
+#include <iostream>
 #include <codecvt>
 #include <locale>
 #include <algorithm>
@@ -106,7 +107,7 @@ namespace Data
 
 		return Out;
 	}
-	*/
+	
 	
 	static uint32_t GetOccurrencesInString(std::string inString, std::string OccurrenceString, bool bFindLowercaseOccurrences = true)
 	{
@@ -163,12 +164,42 @@ namespace Data
 
 		return occurrences;
 	}
-
+	*/
 
 	struct StringOccurrence
 	{
 		uint32_t NumberOfOccurrences = 0;
 		StringT String;
+
+		bool operator>(StringOccurrence& Rhs)
+		{
+			return NumberOfOccurrences > Rhs.NumberOfOccurrences;
+		}
+
+		bool operator<(StringOccurrence& Rhs)
+		{
+			return NumberOfOccurrences < Rhs.NumberOfOccurrences;
+		}
+
+		bool operator>=(StringOccurrence& Rhs)
+		{
+			return NumberOfOccurrences >= Rhs.NumberOfOccurrences;
+		}
+
+		bool operator<=(StringOccurrence& Rhs)
+		{
+			return NumberOfOccurrences <= Rhs.NumberOfOccurrences;
+		}
+
+		bool operator==(StringOccurrence& Rhs)
+		{
+			return NumberOfOccurrences == Rhs.NumberOfOccurrences;
+		}
+
+		bool operator!=(StringOccurrence& Rhs)
+		{
+			return NumberOfOccurrences != Rhs.NumberOfOccurrences;
+		}
 	};
 
 	static std::vector<StringOccurrence> GetNumberOfWordOccurrences(std::vector<StringT> Words)
@@ -177,28 +208,41 @@ namespace Data
 
 		for (auto Word : Words)
 		{
-			StringOccurrence WordOccurrence;
-			WordOccurrence.String = Word;
-
-			for (auto CompWord : Words)
+			bool bFoundOccurrence = false;
+			// Iterate through all of the occurrences, see if the word already exists
+			for (auto& Occurrence : Out)
 			{
-				if (Word == CompWord)
+				if (Word == Occurrence.String)
 				{
-					WordOccurrence.NumberOfOccurrences++;
+					bFoundOccurrence = true;
+					Occurrence.NumberOfOccurrences++;
+					break;
 				}
 			}
 
-			for (auto iter = Words.begin(); iter != Words.end(); )
+			// If the word doesn't exist, push back a new occurrence
+			if (!bFoundOccurrence)
 			{
-				if (*iter == Word)
-					iter = Words.erase(iter);
-				else
-					++iter;
+				StringOccurrence WordOccurrence;
+				WordOccurrence.String = Word;
+				WordOccurrence.NumberOfOccurrences = 1;
+				Out.push_back(WordOccurrence);
 			}
-
-			Out.push_back(WordOccurrence);
 		}
 
 		return Out;
+	}
+
+	// Check if a string ends with another string
+	static bool EndsWith(std::string const &fullString, std::string const &ending)
+	{
+		if (fullString.length() >= ending.length())
+		{
+			return (0 == fullString.compare(fullString.length() - ending.length(), ending.length(), ending));
+		}
+		else
+		{
+			return false;
+		}
 	}
 }

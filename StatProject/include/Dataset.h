@@ -98,6 +98,8 @@ namespace Data
 		std::vector<std::shared_ptr<FieldBase>> Fields;
 
 	public:
+		std::string Name;
+
 		// Push back a NewField on to Fields
 		template<class T>
 		void AddField(T NewField);

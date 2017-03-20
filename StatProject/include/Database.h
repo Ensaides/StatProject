@@ -1,5 +1,7 @@
 #pragma once
 #include <string>
+#include <list>
+#include "Typeform.h"
 
 namespace Database
 {
@@ -11,4 +13,10 @@ namespace Database
 	// If bCatchException = true, then the func will catch any OTL exceptions and print errors
 	// If bCatchException = false, it will rethrow the exceptions
 	void Query(std::string Query, bool bCatchException);
+
+	void LoadData();
+
+	void SaveData();
+
+	Data::TypeformList& GetTypeforms();
 }

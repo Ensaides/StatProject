@@ -81,7 +81,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Module|x64'" Label="Configuration">
     <UseDebugLibraries>true</UseDebugLibraries>
     <ConfigurationType>Makefile</ConfigurationType>
-    <RemoteRootDir>~/Work/projects</RemoteRootDir>
+    <RemoteRootDir>/home/nicholas/Work/projects</RemoteRootDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Executable|x64'" Label="Configuration">
     <UseDebugLibraries>false</UseDebugLibraries>
@@ -125,8 +125,10 @@
       <RemoteCopyFile Condition="'$(Configuration)|$(Platform)'=='Debug Module|x64'">true</RemoteCopyFile>
     </ClCompile>
     <ClCompile Include="src\modulemain.cpp" />
+    <ClCompile Include="src\Data.cpp" />
     <ClCompile Include="src\StatProject.cpp" />
     <ClCompile Include="src\StatProjectLua.cpp" />
+    <ClCompile Include="src\StringHelpers.cpp" />
     <ClCompile Include="src\Test.cpp" />
     <ClCompile Include="src\TSVParser.cpp" />
   </ItemGroup>
@@ -147,13 +149,14 @@
       <RemoteCopyFile Condition="'$(Configuration)|$(Platform)'=='Debug Executable|x64'">true</RemoteCopyFile>
       <RemoteCopyFile Condition="'$(Configuration)|$(Platform)'=='Debug Module|x64'">true</RemoteCopyFile>
     </None>
-    <None Include="src\html\data.tsv" />
-    <None Include="src\html\index.html" />
     <None Include="src\sql\database.sql">
       <RemoteCopyFile Condition="'$(Configuration)|$(Platform)'=='Debug Executable|x64'">true</RemoteCopyFile>
       <RemoteCopyFile Condition="'$(Configuration)|$(Platform)'=='Debug Module|x64'">true</RemoteCopyFile>
     </None>
+    <None Include="src\Typeform.cpp" />
     <None Include="StartServer.sh" />
+    <None Include="www\data\ExcelFiles.lua" />
+    <None Include="www\data\Typeforms.lua" />
     <None Include="www\index.html" />
     <None Include="www\main.css" />
     <None Include="www\upload\data.lua" />
@@ -171,6 +174,7 @@
     <ClInclude Include="include\StatProjectLua.h" />
     <ClInclude Include="include\StringHelpers.h" />
     <ClInclude Include="include\TSVParser.h" />
+    <ClInclude Include="include\Typeform.h" />
   </ItemGroup>
   <ItemDefinitionGroup />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

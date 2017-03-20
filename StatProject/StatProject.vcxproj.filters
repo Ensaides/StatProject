@@ -25,9 +25,6 @@
     <Filter Include="include\Lua">
       <UniqueIdentifier>{e4800e31-416d-48af-9e18-5d730f4efe56}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\html">
-      <UniqueIdentifier>{81c441a3-7437-40e6-b5d0-7701431e99e6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="data">
       <UniqueIdentifier>{023da255-22fc-442d-ad27-cdae7b02c5e6}</UniqueIdentifier>
     </Filter>
@@ -48,6 +45,15 @@
     </Filter>
     <Filter Include="www\upload">
       <UniqueIdentifier>{4735a8df-cf86-4e2a-b1af-83b557ac1b9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="www\data">
+      <UniqueIdentifier>{a3b5537e-d042-4846-a315-a4393e92706d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\Data">
+      <UniqueIdentifier>{d5cade94-8c43-468b-96f3-84cfbdd1e70c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\Parser">
+      <UniqueIdentifier>{d377d6ac-51a2-4a56-9e8f-d082b23aac69}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -93,6 +99,12 @@
     <ClCompile Include="src\Dataset.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\Data.cpp">
+      <Filter>src\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="src\StringHelpers.cpp">
+      <Filter>src\Lua</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="makefile" />
@@ -107,12 +119,6 @@
     </None>
     <None Include="include\LuaHelpers.inl">
       <Filter>include\Lua</Filter>
-    </None>
-    <None Include="src\html\index.html">
-      <Filter>src\html</Filter>
-    </None>
-    <None Include="src\html\data.tsv">
-      <Filter>src\html</Filter>
     </None>
     <None Include="data\Meeting(1) S2017-report.tsv">
       <Filter>data</Filter>
@@ -136,24 +142,24 @@
     <None Include="www\upload\data.lua">
       <Filter>www\upload</Filter>
     </None>
-    <None Include="include\Dataset.inl">
-      <Filter>include</Filter>
-    </None>
     <None Include="www\main.css">
       <Filter>www</Filter>
+    </None>
+    <None Include="www\data\ExcelFiles.lua">
+      <Filter>www\data</Filter>
+    </None>
+    <None Include="src\Typeform.cpp">
+      <Filter>src</Filter>
+    </None>
+    <None Include="include\Dataset.inl">
+      <Filter>include\Data</Filter>
+    </None>
+    <None Include="www\data\Typeforms.lua">
+      <Filter>www\data</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Connection.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\HTMLParser.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\JSONParser.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Database.h">
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="include\IO.h">
@@ -168,17 +174,29 @@
     <ClInclude Include="include\StatProjectLua.h">
       <Filter>include\StatProject</Filter>
     </ClInclude>
-    <ClInclude Include="include\TSVParser.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Dataset.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ExcelParser.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="include\StringHelpers.h">
       <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Database.h">
+      <Filter>include\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Dataset.h">
+      <Filter>include\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="include\JSONParser.h">
+      <Filter>include\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="include\TSVParser.h">
+      <Filter>include\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ExcelParser.h">
+      <Filter>include\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="include\HTMLParser.h">
+      <Filter>include\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Typeform.h">
+      <Filter>include\Data</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

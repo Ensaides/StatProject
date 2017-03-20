@@ -8,67 +8,70 @@
 static void GetQuestions(const Json::Value& Value, Data::Dataset& Out);
 static void GetResponses(const Json::Value& Value, Data::Dataset& Out);
 
-void JSONParser::PrintJson(const Json::Value& Value, uint16_t Level = 0)
+namespace Parsers
 {
-	using namespace Json;
-
-	switch (Value.type())
+	void JSON::PrintJson(const Json::Value& Value, uint16_t Level = 0)
 	{
-	case ValueType::stringValue:
-		for (int i = 0; i < Level; i++)
-			printf("\t");
-		printf("String: %s\n", Value.asCString());
-		break;
+		using namespace Json;
 
-	case ValueType::intValue:
-		for (int i = 0; i < Level; i++)
-			printf("\t");
-		printf("Int: %d\n", Value.asInt());
-		break;
-
-	case ValueType::uintValue:
-		for (int i = 0; i < Level; i++)
-			printf("\t");
-		printf("UInt: %u\n", Value.asUInt());
-		break;
-
-	case ValueType::realValue:
-		for (int i = 0; i < Level; i++)
-			printf("\t");
-		printf("Float: %f\n", Value.asFloat());
-		break;
-
-	default:
-		break;
-	}
-
-	if (Value.type() == ValueType::arrayValue)
-	{
-		for (auto Elem : Value)
+		switch (Value.type())
 		{
-			PrintJson(Elem, Level + 1);
-		}
-	}
-	else if (Value.type() == ValueType::objectValue)
-	{
-		for (auto Name : Value.getMemberNames())
-		{
+		case ValueType::stringValue:
 			for (int i = 0; i < Level; i++)
 				printf("\t");
+			printf("String: %s\n", Value.asCString());
+			break;
 
-			printf("Member: %s\n", Name.c_str());
-			PrintJson(Value[Name], Level + 1);
+		case ValueType::intValue:
+			for (int i = 0; i < Level; i++)
+				printf("\t");
+			printf("Int: %d\n", Value.asInt());
+			break;
+
+		case ValueType::uintValue:
+			for (int i = 0; i < Level; i++)
+				printf("\t");
+			printf("UInt: %u\n", Value.asUInt());
+			break;
+
+		case ValueType::realValue:
+			for (int i = 0; i < Level; i++)
+				printf("\t");
+			printf("Float: %f\n", Value.asFloat());
+			break;
+
+		default:
+			break;
+		}
+
+		if (Value.type() == ValueType::arrayValue)
+		{
+			for (auto Elem : Value)
+			{
+				PrintJson(Elem, Level + 1);
+			}
+		}
+		else if (Value.type() == ValueType::objectValue)
+		{
+			for (auto Name : Value.getMemberNames())
+			{
+				for (int i = 0; i < Level; i++)
+					printf("\t");
+
+				printf("Member: %s\n", Name.c_str());
+				PrintJson(Value[Name], Level + 1);
+			}
 		}
 	}
-}
 
-void JSONParser::GetDatasetFromTypeform(const Json::Value& Value, Data::Dataset& Out)
-{
-	using namespace Data;
-	Out = Dataset();
+	void JSON::GetDatasetFromTypeform(const Json::Value& Value, Data::Dataset& Out)
+	{
+		using namespace Data;
+		Out = Dataset();
 
-	GetQuestions(Value, Out);
-	GetResponses(Value, Out);
+		GetQuestions(Value, Out);
+		GetResponses(Value, Out);
+	}
 }
 
 void GetQuestions(const Json::Value& Value, Data::Dataset& Out)

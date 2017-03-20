@@ -1,6 +1,9 @@
 #pragma once
 
-namespace ExcelParser
+namespace Parsers
 {
-	void Init();
+	namespace Excel
+	{
+		void Init();
+	}
 }

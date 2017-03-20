@@ -2,7 +2,7 @@
 #include "HTMLParser.h"
 #include <libxml/HTMLparser.h>
 
-using namespace HTMLParser;
+using namespace Parsers::HTML;
 
 // Foward declaration for handlers for elements starting/ending
 static void StartElement(void* Userdata, const xmlChar *name, const xmlChar **attributes);
@@ -31,21 +31,24 @@ htmlSAXHandler saxHandler =
 	CharacterWriter
 };
 
-HTMLPage HTMLParser::ParseHTML(const std::string &html)
+namespace Parsers
 {
-	//  Create a new page to return
-	auto ReturnHTMLPage = HTMLPage();
-	htmlParserCtxtPtr ctxt;
+	HTMLPage HTML::ParseHTML(const std::string &html)
+	{
+		//  Create a new page to return
+		auto ReturnHTMLPage = HTMLPage();
+		htmlParserCtxtPtr ctxt;
 
-	ctxt = htmlCreatePushParserCtxt(&saxHandler, &ReturnHTMLPage, "", 0, "",
-		XML_CHAR_ENCODING_NONE);
+		ctxt = htmlCreatePushParserCtxt(&saxHandler, &ReturnHTMLPage, "", 0, "",
+			XML_CHAR_ENCODING_NONE);
 
-	htmlParseChunk(ctxt, html.c_str(), html.size(), 0);
-	htmlParseChunk(ctxt, "", 0, 1);
+		htmlParseChunk(ctxt, html.c_str(), html.size(), 0);
+		htmlParseChunk(ctxt, "", 0, 1);
 
-	htmlFreeParserCtxt(ctxt);
+		htmlFreeParserCtxt(ctxt);
 
-	return ReturnHTMLPage;
+		return ReturnHTMLPage;
+	}
 }
 
 // The parent index, -1 is an invalid index

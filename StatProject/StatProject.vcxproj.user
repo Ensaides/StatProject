@@ -6,8 +6,14 @@
     <DebuggerFlavor>LinuxDebugger</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Module|x64'">
-    <RemoteTarget>1507400300;10.0.0.138 (username=nicholas, port=22, authentication=Password)</RemoteTarget>
-    <RemoteDebuggerCommand>$(RemoteRootDir)/$(ProjectName)/bin/statproject</RemoteDebuggerCommand>
+    <RemoteDebuggerCommand>/usr/bin/luvit</RemoteDebuggerCommand>
     <DebuggerFlavor>LinuxDebugger</DebuggerFlavor>
+    <RemoteDebuggerCommandArguments>$(RemoteRootDir)/$(ProjectName)/lua/src/main.lua</RemoteDebuggerCommandArguments>
+    <RemoteDebuggingMode>gdb</RemoteDebuggingMode>
+    <PreLaunchCommand>cd $(RemoteRootDir)/$(ProjectName)/lua/src/</PreLaunchCommand>
+    <AdditionalDebuggerCommands>
+    </AdditionalDebuggerCommands>
+    <AdditionalSymbolSearchPaths>$(RemoteRootDir)/$(ProjectName)/bin/debug/;$(AdditionalSymbolSearchPaths)</AdditionalSymbolSearchPaths>
+    <RemoteDebuggerWorkingDirectory>$(RemoteRootDir)/$(ProjectName)/lua/src/</RemoteDebuggerWorkingDirectory>
   </PropertyGroup>
 </Project>

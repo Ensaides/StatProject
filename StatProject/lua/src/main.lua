@@ -63,11 +63,16 @@ local function onRequest(req, res)
 		filepath = filepath .. "index.html";
 	end
 
+	local Path, Options = StatProject.GetPathAndOptionsFromURL(filepath);
+	filepath = Path;
+
+	utils.print(filepath);
+
 	-- Check if the file exists before we load it
 	local ok, err = fs.existsSync(filepath);
 	if (ok) then
 		-- Load the file and send it
-		if (utils.string.ends(req.url, ".lua")) then
+		if (utils.string.ends(filepath, ".lua")) then
 				local f, ferr = loadfile(filepath);
 
 				if (f) then
@@ -114,7 +119,6 @@ local function onRequest(req, res)
 	res:finish();
 
 end
---):listen(52, '10.0.0.138');
 
 http.createServer(onRequest):listen(52)
 --[[

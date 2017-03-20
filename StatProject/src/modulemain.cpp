@@ -1,13 +1,16 @@
 #include "StatProject.h"
 #include "StatProjectLua.h"
 #include "Connection.h"
+#include "StringHelpers.h"
 #include "IO.h"
 #include "JSONParser.h"
 #include "Config.h"
+#include "Typeform.h"
 #include "Dataset.h"
 #include <iostream>
 #include <fstream>
 #include "StringHelpers.h"
+#include "Database.h"
 
 extern "C"
 {
@@ -17,7 +20,7 @@ extern "C"
 using namespace std;
 using namespace Data;
 
-static void OnDownload(string Data);
+//static void OnDownload(string Data);
 static vector<StringT> SplitStringsByDelims(vector<StringT> Strings, vector<StringT> Delims);
 
 // Lua should call this when loading the library
@@ -30,15 +33,12 @@ int __lua_main(lua_State* L)
 	StatProject::Initialize(1, dirargarray);
 	StatProjectLua::Initialize(L);
 
-	// Download the crap
-	Connection::DownloadPageThreaded("https://api.typeform.com/v1/form/G1Zwk8?key=" + Config::GetConfigValues()["TypeformMacAPIKey"],
-		std::function<void(string)>(&OnDownload));
-
-	//OnDownload(String);
+	Database::SaveData();
 
 	return 1;
 }
 
+/*
 void OnDownload(string Data)
 {
 	using namespace Json;
@@ -62,31 +62,37 @@ void OnDownload(string Data)
 	{
 		if (auto StringField = Cast<StringT>(Field))
 		{
-			cout << "ID2: " << Field->GetID() << endl;
-			vector<StringT> WordDelims = { u",", u"/", u" ", u";" };
+			vector<StringT> WordDelims = { u",", u"/", u" ", u";", u"\n", u"\r" };
 
 			vector<StringT> SplitString = SplitStringsByDelims(StringField->GetData(), WordDelims);
 
-			for (auto NewString : SplitString)
+			auto Occurrences = GetNumberOfWordOccurrences(StringField->GetData());
+
+			struct CompareStruct
 			{
-				for (wchar_t Char : NewString)
+				bool operator() (StringOccurrence& Lhs, StringOccurrence& Rhs) { return Lhs > Rhs; };
+			} MyCompareStruct;
+
+			sort(Occurrences.begin(), Occurrences.end(), MyCompareStruct);
+
+			for (auto Occurrence : Occurrences)
+			{
+				cout << "Number : " << Occurrence.NumberOfOccurrences;
+
+				cout << " Word : '";
+				for (wchar_t Char : Occurrence.String)
 				{
 					wcout << Char;
 				}
-				cout << endl;
+				cout << "'" << endl;
 			}
 			cout << endl;
 
 			cout << endl << endl;
 		}
 	}
-
-	for (auto Field : NewDataset)
-	{
-		cout << "SHIT ID: " << Field->GetID() << endl;
-	}
-	cout << endl;
 }
+*/
 
 vector<StringT> SplitStringsByDelims(vector<StringT> Strings, vector<StringT> Delims)
 {

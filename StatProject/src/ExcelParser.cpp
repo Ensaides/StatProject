@@ -9,16 +9,16 @@
 using namespace std;
 using namespace libxl;
 
-void ExcelParser::Init()
+namespace Parsers
 {
-	string dir = string(IO::GetProgramDirectory() + "data/upload");
-	vector<string> files = vector<string>();
-
-	IO::GetFilesInDirectory(dir, files);
-
-	for (auto file : files) 
+	void Excel::Init()
 	{
-		IO::Print(file);
+		string dir = string(IO::GetProgramDirectory() + "data/upload");
+		vector<string> files = vector<string>();
+
+		IO::GetFilesInDirectory(dir, files);
+
+		IO::Printf("Loaded %d excel files...", files.size());
 	}
 }
 

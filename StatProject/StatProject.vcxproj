@@ -126,6 +126,7 @@
     </ClCompile>
     <ClCompile Include="src\modulemain.cpp" />
     <ClCompile Include="src\Data.cpp" />
+    <ClCompile Include="src\OpenCL.cpp" />
     <ClCompile Include="src\StatProject.cpp" />
     <ClCompile Include="src\StatProjectLua.cpp" />
     <ClCompile Include="src\StringHelpers.cpp" />
@@ -149,6 +150,7 @@
       <RemoteCopyFile Condition="'$(Configuration)|$(Platform)'=='Debug Executable|x64'">true</RemoteCopyFile>
       <RemoteCopyFile Condition="'$(Configuration)|$(Platform)'=='Debug Module|x64'">true</RemoteCopyFile>
     </None>
+    <None Include="src\OpenCL\Test.cl" />
     <None Include="src\sql\database.sql">
       <RemoteCopyFile Condition="'$(Configuration)|$(Platform)'=='Debug Executable|x64'">true</RemoteCopyFile>
       <RemoteCopyFile Condition="'$(Configuration)|$(Platform)'=='Debug Module|x64'">true</RemoteCopyFile>

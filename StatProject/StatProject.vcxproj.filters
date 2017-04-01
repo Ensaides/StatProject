@@ -55,6 +55,9 @@
     <Filter Include="include\Parser">
       <UniqueIdentifier>{d377d6ac-51a2-4a56-9e8f-d082b23aac69}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\OpenCL">
+      <UniqueIdentifier>{79a33f66-743a-4c3c-8fd4-995c9db106c5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -104,6 +107,9 @@
     </ClCompile>
     <ClCompile Include="src\StringHelpers.cpp">
       <Filter>src\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OpenCL.cpp">
+      <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -156,6 +162,9 @@
     </None>
     <None Include="www\data\Typeforms.lua">
       <Filter>www\data</Filter>
+    </None>
+    <None Include="src\OpenCL\Test.cl">
+      <Filter>src\OpenCL</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

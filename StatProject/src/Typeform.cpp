@@ -1,8 +1,10 @@
+#include "StatProjectLua.h"
 #include "Typeform.h"
 #include "IO.h"
 #include "Connection.h"
 #include "JSONParser.h"
 #include "Dataset.h"
+#include "Database.h"
 #include <memory>
 
 using namespace Json;
@@ -85,7 +87,7 @@ namespace Data
 	{
 		for (auto& Typeform : *this)
 		{
-			if (Typeform.GetName() == Index)
+			if (Typeform.GetTypeformID() == Index)
 			{
 				return Typeform;
 			}
@@ -93,4 +95,60 @@ namespace Data
 
 		throw std::runtime_error("Could not find index '" + Index + "' in Typeform list");
 	}
+
+	bool TypeformList::Exists(std::string Index)
+	{
+		for (auto& Typeform : *this)
+		{
+			if (Typeform.GetTypeformID() == Index)
+			{
+				return true;
+			}
+		}
+
+		return false;
+	}
+}
+
+#include <iostream>
+
+lua_function(GetTypeformData)
+{
+	if (lua_type(L, 1) == LUA_TSTRING)
+	{
+		auto Index = std::string(lua_tostring(L, 1));
+
+		if (Database::GetTypeforms().Exists(Index))
+		{
+			Json::Value Root;
+
+			auto& Typeform = Database::GetTypeforms()[Index];
+			auto& Data = Typeform.GetData();
+
+			Root["Fields"] = {};
+
+			for (auto& Field : Data)
+			{
+				Root["Fields"][Field->GetName()] = {};
+				Root["Fields"][Field->GetName()]["Type"] = Data::TypeNames[Field->GetType()];
+			}
+
+			lua_pushstring(L, Root.toStyledString().c_str());
+			return 1;
+		}
+	}
+	return 0;
+}
+
+lua_function(GetTypeformField)
+{
+	if (lua_type(L, 1) == lua_type(L, 2) == LUA_TSTRING)
+	{
+		auto TypeformID = std::string(lua_tostring(L, 1));
+		auto FieldID = std::string(lua_tostring(L, 2));
+
+		std::cout << "TypeformID: " << TypeformID << " FieldID: " << FieldID << std::endl;
+	}
+
+	return 0;
 }

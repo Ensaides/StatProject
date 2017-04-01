@@ -22,6 +22,7 @@ using namespace Data;
 
 //static void OnDownload(string Data);
 static vector<StringT> SplitStringsByDelims(vector<StringT> Strings, vector<StringT> Delims);
+static vector<pair<string, string>> GetLuaArgs(lua_State* L);
 
 // Lua should call this when loading the library
 // loadlib("statproject.so", "__lua_main")

@@ -7,6 +7,11 @@ local table			= require("table");
 local pathJoin		= require("luvi").path.join
 local fs			= require("fs");
 
+local params = {};
+if (args[2] and args[2] == "-colorize=off") then
+	 params["colorize"] = false;
+end
+
 -- Takes in an optional table of pairs, returns the global environment
 -- The first pair value is the name of the variable, the second pair value is the value
 GetEnvironment = function(...)
@@ -19,6 +24,7 @@ GetEnvironment = function(...)
 	env.LoadScript = LoadScript;
 	env.Include = Include;
 	env.GetEnvironment = GetEnvironment;
+	env.params = params;
 
 	for _,v in pairs({...}) do
 		env[v[1]] = v[2];
@@ -52,6 +58,9 @@ end
 Include("Utils.lua");
 Include("StatProject.lua");
 
+
+StatProject.OpenCLTest();
+
 -- Actually create the server!
 --http.createServer(
 local function onRequest(req, res)
@@ -77,7 +86,7 @@ local function onRequest(req, res)
 
 				if (f) then
 					-- If we have successfully loaded the file and compiled it, then set the environment and pcall the file
-					setfenv(f, GetEnvironment({"req", req}, {"res", res}));
+					setfenv(f, GetEnvironment({"req", req}, {"res", res}, {"options", Options}));
 
 					local ok, err = xpcall(f, debug.traceback);
 
@@ -121,6 +130,7 @@ local function onRequest(req, res)
 end
 
 http.createServer(onRequest):listen(52)
+
 --[[
 https.createServer({
   key = fs.readFileSync(pathJoin(module.dir, "key.pem")),
@@ -128,4 +138,8 @@ https.createServer({
 }, onRequest):listen(48)
 ]]
 
-utils.log("Server running at " .. utils.colorize("quotes", "http://" .. '127.0.0.1' .. ":" .. '52' .. "/"));
+if (params["colorize"] ~= false) then
+	utils.log("Server running at " .. utils.colorize("quotes", "http://" .. '127.0.0.1' .. ":" .. '52' .. "/"));
+else
+	utils.log("Server running at http://" .. '127.0.0.1' .. ":" .. '52' .. "/");
+end

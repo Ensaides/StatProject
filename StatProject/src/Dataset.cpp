@@ -1,6 +1,8 @@
 #include "Dataset.h"
 #include <iostream>
 
+std::vector<std::string> Data::TypeNames;
+
 namespace Data
 {
 	// Field members

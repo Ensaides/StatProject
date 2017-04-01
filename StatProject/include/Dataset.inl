@@ -14,7 +14,6 @@ namespace std
 namespace Data
 {
 	// Field members
-
 	template<typename T>
 	Field<T>::Field(const Field<T>& Other)
 	{
@@ -74,6 +73,7 @@ namespace Data
 		namespace FieldType																							\
 		{																											\
 			static const uint8_t NAME = NUMBER;																		\
+			static const Data::DeclareTypeName NAME##Stuct = Data::DeclareTypeName(NUMBER, std::string(#NAME));		\
 		}																											\
 																													\
 		template<>																									\
@@ -82,12 +82,13 @@ namespace Data
 			typedef TYPE Value;																						\
 		};																											\
 																													\
+																													\
 		using NAME##T = TYPE;																						\
 																													\
 		template<>																									\
 		FieldTypeT GetFieldTypeOverride<TYPE>()																		\
 		{																											\
 			return NUMBER;																							\
-		}																											\
+		};																											\
 	}																								
 																									

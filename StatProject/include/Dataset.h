@@ -177,6 +177,19 @@ namespace Data
 	{
 		return GetFieldType<T>() == Base->GetType() ? (Field<T>*) Base.get() : nullptr;
 	}
+
+	extern std::vector<std::string> TypeNames;
+
+	struct DeclareTypeName
+	{
+		DeclareTypeName(int Number, std::string Name)
+		{
+			if (Number >= TypeNames.size())
+				TypeNames.resize(Number + 1);
+
+			TypeNames[Number] = Name;
+		}
+	};
 }
 
 // Most of the implementations are in this .inl file

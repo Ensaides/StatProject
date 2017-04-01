@@ -6,7 +6,7 @@
 
 using namespace std;
 
-lua_function(GetExcelFiles)
+lua_function(GetExcelFiles) 
 {
 	string Dir = string(IO::GetProgramDirectory() + "data/upload");
 	vector<string> Files;

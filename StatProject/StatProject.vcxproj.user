@@ -8,7 +8,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Module|x64'">
     <RemoteDebuggerCommand>/usr/bin/luvit</RemoteDebuggerCommand>
     <DebuggerFlavor>LinuxDebugger</DebuggerFlavor>
-    <RemoteDebuggerCommandArguments>$(RemoteRootDir)/$(ProjectName)/lua/src/main.lua</RemoteDebuggerCommandArguments>
+    <RemoteDebuggerCommandArguments>$(RemoteRootDir)/$(ProjectName)/lua/src/main.lua -colorize=off</RemoteDebuggerCommandArguments>
     <RemoteDebuggingMode>gdb</RemoteDebuggingMode>
     <PreLaunchCommand>cd $(RemoteRootDir)/$(ProjectName)/lua/src/</PreLaunchCommand>
     <AdditionalDebuggerCommands>

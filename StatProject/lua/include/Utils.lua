@@ -20,7 +20,11 @@ utils.log = function(String, printdate, logtofile)
 	local printstring = "";
 
 	if (printdate) then
-		printstring = utils.colorize("property", os.date("%x", os.time())) .. utils.colorize("braces", os.date(" %X", os.time())) .. " ";
+		if (params["colorize"] ~= false) then
+			printstring = utils.colorize("property", os.date("%x", os.time())) .. utils.colorize("braces", os.date(" %X", os.time())) .. " ";
+		else
+			printstring = os.date("%x", os.time()) .. os.date(" %X", os.time()) .. " ";
+		end
 	end
 
 	printstring = printstring .. String;
@@ -37,7 +41,11 @@ utils.logtofile = function(String)
 		fs.write(log, 0, String);
 		fs.write(log, 0, "\n");
 	else
-		utils.log(utils.colorize("err", "ERROR: Unable to write to log file!"), true, false);
+		if (params["colorize"] ~= false) then
+			utils.log(utils.colorize("err", "ERROR: Unable to write to log file!"), true, false);
+		else
+			utils.log("ERROR: Unable to write to log file!", true, false);
+		end
 	end
 end
 

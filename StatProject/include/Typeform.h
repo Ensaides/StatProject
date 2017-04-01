@@ -32,5 +32,7 @@ namespace Data
 	{
 	public:
 		Typeform& operator[](std::string Index);
+
+		bool Exists(std::string Index);
 	};
 }

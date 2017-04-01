@@ -56,7 +56,7 @@ lua_function(GetPathAndOptionsFromURL)
 		{
 			lua_createtable(L, 0, Options.size());
 
-			int i = 0;
+			int i = 1;
 			for (auto Option : Options)
 			{
 				lua_pushnumber(L, i);
@@ -70,3 +70,4 @@ lua_function(GetPathAndOptionsFromURL)
 		return bReturnOptions + 1;
 	}
 }
+

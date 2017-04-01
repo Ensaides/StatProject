@@ -13,6 +13,12 @@
 
 static std::string Directory;
 static bool bSetDirectory = false;
+static bool bColorizedPrint = true;
+
+void IO::SetColorizedPrint(bool bColorOn)
+{
+	bColorizedPrint = bColorOn;
+}
 
 void IO::SetProgramDirectory(std::string ProgramDirectory)
 {
@@ -53,6 +59,12 @@ std::string IO::ReadFile(std::string FilePath)
 	}
 
 	std::ifstream t(Directory + FilePath);
+
+	if (!t.is_open())
+	{
+		throw std::runtime_error("Failed to open file at path '" + Directory + FilePath + "'");
+	}
+
 	std::stringstream buffer;
 	buffer << t.rdbuf();
 
@@ -73,8 +85,14 @@ void IO::Print(const std::string& Text, bool bPrintDate, bool bLogToFile)
 		strftime(date, 80, "%x", timeinfo);
 		strftime(time, 80, "%X", timeinfo);
 
-		// These weird expressions colorize the output
-		printf("\033[38;5;253m%s\033[0m \033[38;5;247m%s\033[0m %s\n", date, time, Text.c_str());
+		if (bColorizedPrint)
+		{
+			printf("\033[38;5;253m%s\033[0m \033[38;5;247m%s\033[0m %s\n", date, time, Text.c_str());
+		}
+		else
+		{
+			printf("%s %s %s\n", date, time, Text.c_str());
+		}
 	}
 	else
 	{
